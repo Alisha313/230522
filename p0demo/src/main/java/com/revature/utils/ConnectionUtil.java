@@ -1,8 +1,12 @@
 package com.revature.utils;
 
+import ch.qos.logback.classic.net.SimpleSocketServer;
+import jdk.internal.misc.ThreadFlock;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.concurrent.SubmissionPublisher;
 
 //This Class is where we manage and establish our database connection
 public class ConnectionUtil {
@@ -31,9 +35,13 @@ public class ConnectionUtil {
 
         //This return statement is what returns out actual database Connection object
         //Note how this getConnection() method has a return type of Connection
-        return DriverManager.getConnection(url, username, password);
+        // return DriverManager.getConnection(url, username, password);
 
 
+        if (connection != null && !connection.isClosed()){
+            System.out.println("using a previously created connection");
+            return (Connection);
+        }
     }
 
 }
