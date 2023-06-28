@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+
+    <link rel="stylesheet" href="Forms.css">
+    <style>
+
+
+        p{
+            font-family: cursive;
+            font-style: italic;
+        }
+
+
+        #myForm{
+            text-align: center;
+            font-size: large;
+            color: darkslategrey;
+        }
+
+
+        .header{
+            border: 20px groove black;
+            border-radius: 40%;
+        }
+    </style>
+
+</head>
+<body>
+    
+
+
+
+
+
+
+    <form style="background-color: burlywood; border: 10px double black; padding: 25px">
+
+
+
+        <p>Enter username here:</p>
+        <input type="text" placeholder="ex: bigbon" required>
+
+        <p>Enter password here:</p>
+        <input type="password" placeholder="password123">
+
+        <p>How old are you?</p>
+        <input type="number" min="18" max="21">
+
+     
+        <h2>You must choose: </h2>
+
+            <input type="radio" name="radio" id="radio1">
+            <label for="radio1">OPTION A</label>
+        
+            <input type="radio" name="radio" id="radio2">
+            <label for="radio2">OPTION B</label>
+
+
+        <h3>How do you feel about frontend?</h3>
+        
+          <input type="checkbox" name="checkbox" id="check1">
+          <label for="check1">Jovial</label>
+
+          <input type="checkbox" name="checkbox" id="check2">
+          <label for="check2">Terrified</label>
+
+          <input type="checkbox" name="checkbox" id="check3">
+          <label for="check3">Indifferent</label>
+
+          <input type="checkbox" name="checkbox" id="check4">
+          <label for="check4">Somber</label>
+
+
+        <br>
+
+            <input style="margin-left: 25px; margin-top: 30px" 
+            type="submit" value="submit your answers">
+
+    </form>
+
+
+
+    <details>
+        <summary>
+            <p>
+
+
+
+            </p>
+        </summary>
+    </details>
+
+    <img src="https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?cs=srgb&dl=pexels-simona-kidri%C4%8D-2607544.jpg&fm=jpg" alt="DOG PICTURE">
+
+    
+
+</body>
+</html>
