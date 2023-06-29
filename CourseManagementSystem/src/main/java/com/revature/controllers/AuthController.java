@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import ch.qos.logback.core.LayoutBase;
 import com.revature.daos.PersonDAO;
 import com.revature.daos.RoleDAO;
 import com.revature.dto.AuthResponseDTO;
@@ -17,14 +16,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 // This controller will be in charge of allowing us to actually register and login different people
 @RestController
 @RequestMapping("auth")
+@CrossOrigin(origins = "http://127.0.0.1:5500") //greenlight requests coming from frontend
 public class AuthController {
 
     // We have a couple of imports that we'll add in to make sure everything works correctly
@@ -86,19 +83,19 @@ public class AuthController {
 
     // Now that we actually can register a person, it should make sense that we also want to log that person in
     @PostMapping("login")
-    public <Authentication> ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO){
 
         // From here I'll user my authentication manager to authenticate the user
-        Authentication authentication = (Authentication) authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
         );
 
         // Store the authentication inside of the SecurityContext
-        SecurityContextHolder.getContext().setAuthentication((org.springframework.security.core.Authentication) authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
 //        return new ResponseEntity<>("User successfully signed in!", HttpStatus.OK);
 
-        String token = jwtGenerator.generateToken((org.springframework.security.core.Authentication) authentication);
+        String token = jwtGenerator.generateToken(authentication);
 
         return new ResponseEntity<AuthResponseDTO>(new AuthResponseDTO(token), HttpStatus.OK);
 
