@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/" //storing the base URL in this variable for cleaner code below
+const url = "http://127.0.0.1:5500/" //storing the base URL in this variable for cleaner code below
 
 //when the user clicks the login button (onclick), execute the login function below
 document.getElementById("loginButton").onclick = login
@@ -48,6 +48,17 @@ async function login(){
 
         //we need to translate our JWT to gather the incoming user data (name, id, role, etc)
         console.log(parseJwt(data.accessToken))
+
+        //we need to make some data globally visible
+        //(accessible in multiple JS file)
+        //one of many 
+
+        document.cookie = `jwt=${data.accessToken}`
+        document.cookie=  `id=${parseJwt(data.accessToken).Id}`
+        
+
+        //print out our cookie
+        console.log(document.cookie.jwt)
 
         //use the data to determine what landing page the user gets sent to (teacher page vs student page)
         if(parseJwt(data.accessToken).Role === "Teacher"){
